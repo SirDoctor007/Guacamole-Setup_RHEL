@@ -62,7 +62,7 @@ subscription-manager repos --enable=codeready-builder-for-rhel-8-x86_64-rpms
 dnf module enable virt-devel -y
 
 # Install Dependencies
-dnf install -y wget cairo-devel libjpeg-turbo-devel libpng-devel libtool libuuid-devel ffmpeg-devel freerdp-devel pango-devel libssh2-devel libtelnet-devel libvncserver-devel libwebsockets-devel openssl-devel libvorbis-devel libwebp-devel java-11-openjdk-devel libgcrypt-devel pulseaudio-libs-devel policycoreutils-python-utils mariadb mariadb-server
+dnf install -y wget cairo-devel libjpeg-turbo-devel libpng-devel libtool libuuid-devel ffmpeg-devel freerdp-devel pango-devel libssh2-devel libtelnet-devel libvncserver-devel libwebsockets-devel openssl-devel libvorbis-devel libwebp-devel java-11-openjdk-devel libgcrypt-devel pulseaudio-libs-devel policycoreutils-python-utils mariadb mariadb-server nginx
 
 
 ###################################################
@@ -249,8 +249,8 @@ cat ${INSTALL_DIR}/${GUAC_JDBC}/mysql/schema/*.sql | mysql -u root -p${MYSQL_PAS
 
 # Firewall Setup
 cp /etc/firewalld/zones/public.xml ~/fwbackup
-# firewall-cmd --permanent --zone=public --add-service=http
-# firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --permanent --zone=public --add-port=8080/tcp
 # firewall-cmd --permanent --zone=public --add-port=8443/tcp
 firewall-cmd --reload
